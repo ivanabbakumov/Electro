@@ -17,12 +17,12 @@ void loop() {
 ```
 
 ## Работа с фоторезистором
-```
-int threshold = 600;
+```c++
+int threshold = 900;
 
 void setup() {
   pinMode(8, OUTPUT);
-  pinMode(A0, OUTPUT);
+  pinMode(A0, INPUT);
   Serial.begin(9600);
 }
 
