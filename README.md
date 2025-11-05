@@ -13,7 +13,5 @@ void loop() {
   delay(3000);
   digitalWrite(8, LOW);
   delay(3000);
-
-  Serial.println("Goasdf");
 }
 ```
