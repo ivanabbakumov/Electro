@@ -61,3 +61,27 @@ void loop() {
   Serial.println(threshold);
 }
 ```
+
+## С помощью резистора контролируем два режима (мигание диода, выкл)
+```c++
+void setup() {
+  pinMode(8, OUTPUT);
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int photo = analogRead(A0);
+  int ptr = analogRead(A2);
+  if (ptr > 512) {
+    digitalWrite(8, HIGH);
+    delay(3000);
+    digitalWrite(8, LOW);
+    delay(3000);
+  }
+  else digitalWrite(8, LOW);
+  
+
+  Serial.println(ptr);
+}
+```
