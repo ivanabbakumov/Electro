@@ -39,3 +39,25 @@ void loop() {
   Serial.println(photo);
 }
 ```
+
+## Добавили в цепь резистор с переменным сопротивлением 
+```c++
+void setup() {
+  pinMode(8, OUTPUT);
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int photo = analogRead(A0);
+  int threshold = analogRead(A2);
+  if (photo > threshold) {
+    digitalWrite(8, HIGH);
+  }
+  else {
+    digitalWrite(8, LOW);
+  }
+
+  Serial.println(threshold);
+}
+```
