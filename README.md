@@ -123,4 +123,49 @@ void loop() {
 }
 ```
   
+## Подключили пищалку и написали небольшую мелодию для нее через массив
+```c++
+#define LED_PIN 9
+#define LED_PIN_2 8
+#define PTR_PIN A0
+#define BUZZER 10
 
+unsigned long prev = 0;
+unsigned long prev_2 = 0;
+int ledState = 0;
+int ledState_2 = 0;
+int melody[3] = {261, 293, 329}; 
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(LED_PIN_2, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
+  pinMode(PTR_PIN, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  unsigned long current = millis();
+
+  if (current - prev > 30000) {
+    ledState = !ledState;
+    digitalWrite(LED_PIN, ledState);
+    prev = current;
+  }
+
+  if (current - prev_2 > 3000) {
+    ledState_2 = !ledState_2;
+    digitalWrite(LED_PIN_2, ledState_2);
+    for (int i = 0; i < sizeof(melody); i++) {
+      tone(BUZZER, melody[i], 500);
+      delay(100);
+    }
+    
+    prev_2 = current;
+  }
+
+  int ptr = analogRead(PTR_PIN);
+  Serial.println(ptr);
+  Serial.println(ledState);
+}
+```
