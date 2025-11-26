@@ -80,6 +80,9 @@ void loop() {
     delay(3000);
   }
   else digitalWrite(8, LOW);
+  Serial.println(ptr);
+}
+```
 
 ## С помощью функции millis() заменили функцию delay
 ```c++
@@ -121,6 +124,3 @@ void loop() {
 ```
   
 
-  Serial.println(ptr);
-}
-```
