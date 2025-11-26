@@ -80,6 +80,45 @@ void loop() {
     delay(3000);
   }
   else digitalWrite(8, LOW);
+
+## С помощью функции millis() заменили функцию delay
+```c++
+#define LED_PIN 9
+#define LED_PIN_2 8
+#define PTR_PIN A0
+
+unsigned long prev = 0;
+unsigned long prev_2 = 0;
+int ledState = 0;
+int ledState_2 = 0;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(LED_PIN_2, OUTPUT);
+  pinMode(PTR_PIN, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  unsigned long current = millis();
+
+  if (current - prev > 30000) {
+    ledState = !ledState;
+    digitalWrite(LED_PIN, ledState);
+    prev = current;
+  }
+
+  if (current - prev_2 > 3000) {
+    ledState_2 = !ledState_2;
+    digitalWrite(LED_PIN_2, ledState_2);
+    prev_2 = current;
+  }
+
+  int ptr = analogRead(PTR_PIN);
+  Serial.println(ptr);
+  Serial.println(ledState);
+}
+```
   
 
   Serial.println(ptr);
