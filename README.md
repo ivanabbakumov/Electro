@@ -277,3 +277,36 @@ void loop() {
 
 }
 ```
+
+## Наброски программы для ухода за цветком с сенсорами (связали Arduino и p5.js)
+```c++
+#define PTR A0
+#define PHOTO A2
+#define LED 9
+
+int p5data, p5ptr;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(PTR, INPUT);
+  pinMode(PHOTO, INPUT);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  int val = analogRead(PTR);
+  int photo = analogRead(PHOTO);
+  Serial.println(String(val) + ";" + String(photo));
+
+  if (Serial.available() > 0) {
+    p5data = Serial.read();
+    p5ptr = Serial.read();
+
+    if (p5data == 1) {
+      analogWrite(LED, PTR);
+      delay(100);
+    }
+    else digitalWrite(LED, LOW);
+  }
+}
+```
