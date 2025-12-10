@@ -407,5 +407,9 @@ void loop() {
   // put your main code here, to run repeatedly:
   digitalWrite(DIR_1, HIGH);
   analogWrite(SPEED_1, 255);
+  delay(5000);
+  digitalWrite(DIR_1, LOW);
+  analogWrite(SPEED_1, 255);
+  delay(5000);
 }
 ```
