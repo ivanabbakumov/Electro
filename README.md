@@ -311,7 +311,7 @@ void loop() {
 }
 ```
 
-## Программа, в которым мы принимаем значения с p5 и с датчиков одновременно
+## Программа, в которой мы принимаем значения с p5 и с датчиков одновременно
 ```c++
 #define PHOTO A0
 
@@ -361,5 +361,27 @@ void loop() {
     //   digitalWrite(ledPin, LOW);
     // }
   }
+}
+```
+
+## подключили сервопривод
+```c++
+#include <Servo.h>
+Servo ser;
+
+void setup() {
+  // put your setup code here, to run once:
+  ser.attach(9);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  ser.write(90);
+  delay(1000);
+  ser.write(180);
+  delay(1000);
+  ser.write(0);
+  delay(1000);
 }
 ```
