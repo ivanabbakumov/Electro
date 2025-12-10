@@ -310,3 +310,56 @@ void loop() {
   }
 }
 ```
+
+## Программа, в которым мы принимаем значения с p5 и с датчиков одновременно
+```c++
+#define PHOTO A0
+
+const int ledPin = 9; // the pin that the LED is attached to
+unsigned long prev = 0;
+
+int s1;
+int s2;
+int photo;
+// "S1:120;S2:250";
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  pinMode(PHOTO, INPUT);
+}
+
+void loop() {
+  unsigned long current = millis();
+
+  if (current - prev > 3000) {
+    photo = analogRead(PHOTO);
+    prev = current;
+  }
+  
+  if (Serial.available() > 0) {
+    String data = Serial.readStringUntil('\n');
+
+    int s1Index = data.indexOf("S1:") + 3; 
+    int delIndex = data.indexOf(";", s1Index); 
+    String s1String = data.substring(s1Index, delIndex);
+    int s1 = s1String.toInt();
+    //float temperature = tempString.toFloat();
+
+    // String s2String = data.substring(delIndex + 4, data.length());
+    // int s2 = s2String.toInt();
+
+
+
+    Serial.println("sensor 1: " + String(s1) + "; " + "sensor 2: " + String(photo));
+    analogWrite(ledPin, s1);
+
+    // if (s1 > 100 && photo < 255) {
+    //   analogWrite(ledPin, s1);
+    // }
+    // else {
+    //   digitalWrite(ledPin, LOW);
+    // }
+  }
+}
+```
