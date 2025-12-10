@@ -385,3 +385,27 @@ void loop() {
   delay(1000);
 }
 ```
+
+## Подключили мотор
+```c++
+#define DIR_1 4
+#define SPEED_1 5
+#define DIR_2 7
+#define SPEED_2 6
+
+
+void setup() {
+  // put your setup code here, to run once:
+  for (int i = 4; i < 8; i++) {
+    pinMode(i, OUTPUT);
+  }
+  
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(DIR_1, HIGH);
+  analogWrite(SPEED_1, 255);
+}
+```
